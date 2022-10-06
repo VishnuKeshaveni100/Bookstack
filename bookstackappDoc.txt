@@ -1,0 +1,176 @@
+         									####### BOOKSTACK DOCUMENTATION ###########
+														
+A)About Bookstack:  1)It is a simple, self-hosted, easy-to-use platform for organising and storing information.
+					
+					2)BookStack’s first commit was published on 12 July 2015 by Dan Brown, a British web developer.
+					
+					3)It uses the ideas of books to organise pages and store information.
+					
+					4)The github repository is 	github.com/BookStackApp/BookStack.
+					
+					5)The PHP programming language was used to devolope it.
+                   
+
+B)BookStack Features:  
+				    1) Free & Open Source: 		a.It is a free and Open Source, MIT licensed.
+										   		
+												b.The source is available on GitHub. There is no cost to downloading and installing your own instance of bookstack.
+					
+					2)Easy, Simple Interface:	a.The page editor has a simple WYSIWYG interface and all content is broken into three simple real world groups as below.
+												   
+												   1.Books   2.Chapters   3.Pages 	
+												
+					3)Searchable and Connected:	a.We can search the content in BookStack at book level or across all books, chapters & pages.
+												
+												b.The ability to link directly to any paragraph allows you to keep your documentation connected. 
+												
+					4)Configurable:				a.You can change the name, logo and registration options. 
+									            
+												b.You can also change whether the whole system is publicly viewable or not.
+									
+					5)Simple Requirements:		->BookStack is built using PHP, on top of the Laravel framework and it uses MySQL to store data.
+					
+					6)Built-In diagrams.net:	->The page editor within BookStack has diagrams.net drawing capability built-in, allowing the quick and easy creation of diagrams within your documentation.
+					
+					7)Multi-Lingual:			->users can set their preferred language.
+					
+					8)Optional Markdown Editor:	a.If you prefer to write in Markdown then BookStack supports you. 
+												
+												b.A markdown editor is provided and includes a live-preview as you write your documentation. 
+					
+				    9)Integrated Authentication:a.As well as the default email/password login social providers such as GitHub, Google, Slack, AzureAD and more can be used. 
+												
+												b.Okta, SAML2 and LDAP options are available for enterprise environments. 
+					
+					10) Powerful Features:		a.On top of the powerful search and linking there is also cross-book sorting, page revisions and image management. 
+												
+												b.A full role and permission system allow you to lock down content and actions as required.
+												
+					11)Multi-Factor Authentication: a.MFA is built in & can be enforced at a per-role level where desired. MFA options include TOTP (Google/Microsoft Authenticator, Authy, etc...) and static backup codes.
+					
+					12)Dark & Light Modes:		a.BookStack provides it's user interface in both a light theme and a dark theme. 
+												
+												b.This is configurable at a user level.
+					
+C)Demo Site Url:	1.It is providing demo site Url. Admin email and Admin Password to login to the demo instance.	
+												
+					2.We can experience most of the options & actions that it has.
+												
+					3.The following actions restricted in demo.
+						a)User deletion 
+						b)User updates 
+						c)Setting updates
+
+				    4.The demo database & image storage is automatically reset every half hour
+
+D)Installation Guide:	1)There are number of installation options available depending on your setup. 
+						2)The install process will require some knowledge of hosting a PHP web application & database.
+						3)The following are the basic requirements to install bookstack.
+						
+						4) Requirements:	-> Before Install bookstack we should register our domain and ip in the A record of DNS.
+						
+											->PHP >= 7.4
+       											  	.For installation and maintenance, you’ll need to be able to run php from the command line.
+       												. Required Extensions: OpenSSL, PDO, MBstring, Tokenizer, GD, MySQL, SimpleXML & DOM
+   											-> MySQL >= 5.7 or MariaDB >= 10.2
+        											.For the storage of BookStack content and data.
+        											.Single Database (All permissions advised since application manages schema)
+   											-> Git Version Control
+        											.For application of updates when following our standard process.
+   											-> Composer >= v2.0
+       												. For installation and management of our PHP dependencies.
+   											-> A PHP Compatible Webserver
+      												.  For usage with PHP and for serving static files.
+													.  for example Apache2,Nginx.
+----We can	Install bookstack by the following methods.
+		a)Manual Installation
+		b)Using Shellscript for various Ubuntu versions.
+		c)Using DOcker Containers.
+		d)Community Guides for different linux distributions.
+						
+						A)Manual Installation:  ->Ensure the above requirements are met before installing.
+
+												->This project currently uses the release branch of the BookStack GitHub repository as a stable channel for providing updates. 
+												
+												->The installation is currently somewhat complicated and will be made simpler in future releases. Some PHP or Laravel experience will make this easier.
+												
+												->The following are the manual installation steps:
+												
+    												1.Clone the release branch of the BookStack GitHub repository into a folder.
+
+													   -> git clone https://github.com/BookStackApp/BookStack.git --branch release --single-branch
+
+    												2.cd into the application folder and run composer install --no-dev.
+    												
+													3.Copy the .env.example file to .env and fill with your own database and mail details.
+													
+													4.Ensure the storage, bootstrap/cache & public/uploads folders are writable by the web server.
+													
+													5.In the application root, Run php artisan key:generate to generate a unique application key.
+													
+													6.If not using Apache or if .htaccess files are disabled you will have to create some URL rewrite rules as shown below.
+													
+													7.Set the web root on your server to point to the BookStack public folder. This is done with the root setting on Nginx or the DocumentRoot setting on Apache.
+													
+													8.Run php artisan migrate to update the database.
+													
+													9.You can now login using the default admin details admin@admin.com with a password of password. You should change these details immediately after logging in for the first time.
+						
+												 -> Webserver Configuration:: we need to configure the webserver for manual installation by following steps
+												 							
+																a)Apache VirtualHost Example Configuration: ->This configuration is only for http not for https
+																											-> For HTTPS we recommend using https://certbot.eff.org/
+																											
+																											-> cd into the /etc/apache2/sites-available and then vi bookstack.conf file.
+																											
+																											-> Edit the ServerName with your domain name or ip address,then save and exit.
+																b) Nginx Server block example configuration: Here also you need to add the server name with your domain name or ip in the particular configuration file.
+						
+						B)Using Shellscript: 1)Ubuntu 22.04 Installation Script with http:
+													
+															->Before, we need to register domain or ip in the DNS A record or use localhost.
+															->This is only for a fresh OS and here i use localhost to host bookstack instance.
+															->The script will install the requirements automatically which are mentioned above like Apache, MySQL 8.0 & PHP-8.1.
+															->It could Overwrite any existing web setup on the machine.
+															->It also does not set up mail settings or configure system security so you will have to do those separately. 
+															->You can use the script as a reference if you’re installing on a non-fresh machine.
+															-> Here we have following commands to download the script and further.
+																
+																a) To download the script.
+																    wget https://raw.githubusercontent.com/BookStackApp/devops/main/scripts/installation-ubuntu-22.04.sh
+																
+																b) Make it executable.
+																	chmod a+x installation-ubuntu-22.04.sh
+																
+																c) Run the script with admin permissions.
+																	sudo ./installation-ubuntu-22.04.sh
+																
+																d)After that, asking to provide IP or Domain or localhost to host the bookstack
+																
+																e)Then it is installing using the domain or ip or localhost going through the nine(9) steps process.
+																
+																f)By default it is configuring the apache server.
+																
+																g)Setup finshed and you will get login email, login password, install path, Install script log and Access URL.
+																
+																h)You can copy and paste the access URL in the browser and you will get a login page.
+																
+																i)you can login with the default credentials and change after in the edit profile for security.
+
+E)Demo Usage of Bookstack:  1) Once you logged in Toggle deatils page will be displayed.
+
+							2)It dispalys a)Recent Books
+   										  b)Recently Updated Pages
+										  c)Receny Activity.
+				        	3)On the right corner toggle button, with you can switch into dark and light mode.
+							
+							4) Demo project: The hierarchy is as follows to create the content in bookstack.
+							
+												a)Shelves
+												b)Books
+												c)Chapters
+												d)Pages (where you have two editors to create the content)
+											
+										
+												
+													
